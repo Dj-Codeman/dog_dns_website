@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>dog-community • Releases</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      <span>dog-community</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#install">Install</a>
+      <a href="index.html#usage">Usage</a>
+      <a href="index.html#features">Features</a>
+      <a class="active" href="releases.html">Releases</a>
+      <a class="btn secondary" target="_blank" rel="noopener" href="https://github.com/YOUR_ORG_OR_USER/dog_community">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section>
+    <h1 class="section-title">Releases</h1>
+    <p class="tiny">Downloads are attached to each tag. Pre-releases are marked accordingly.</p>
+    <ul id="releaseList" class="releases" aria-live="polite"></ul>
+    <noscript>
+      <p>Please enable JavaScript, or visit the <a target="_blank" rel="noopener" href="https://github.com/Dj-Codeman/dog_communityreleases">GitHub releases page</a>.</p>
+    </noscript>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© <span id="yyyy"></span> dog-community.</p>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script>
+  window.DOG = { owner: "YOUR_ORG_OR_USER", repo: "dog_community" };
+  window.loadReleases();
+</script>
+</body>
+</html>

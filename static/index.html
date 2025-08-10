@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>dog-community • fast, friendly DNS client</title>
+  <meta name="description" content="dog-community is a community-maintained fork of the dog/doge DNS client: colorful output, DoH/DoT, JSON, and a sensible CLI." />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Ensure gradient stays fixed */
+    body {
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    /* Overrides to make command blocks full-width and wrap responsively */
+    .grid .card.full { grid-column: 1 / -1; }
+    .copyrow code { display:block; width:100%; padding:8px 10px; background: var(--code); color:#e2e8f0; border-radius:10px; border:1px solid rgba(148,163,184,.25); overflow-wrap:anywhere; }
+    pre.block { white-space: pre-wrap; overflow: hidden; word-break: break-word; }
+  </style>
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html" aria-label="dog-community home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="11" r="1.2"/><circle cx="14.5" cy="11" r="1.2"/><path d="M8.5 15s2 1.1 3.5 1.1S15.5 15 15.5 15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <span>dog-community</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#install">Install</a>
+      <a href="index.html#usage">Usage</a>
+      <a href="index.html#features">Features</a>
+      <a href="releases.html">Releases</a>
+      <a class="btn secondary" target="_blank" rel="noopener" href="https://github.com/Dj-Codeman/dog_community">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>A fast, friendly DNS client — community maintained</h1>
+    <p class="tagline">
+      dog-community is a maintained fork of the beloved terminal DNS client (dog/doge). It keeps the human-readable
+      output you know, adds steady fixes, and supports DNS over HTTPS/TLS with JSON output for scripting.
+    </p>
+    <div class="cta">
+      <a class="btn" href="#install">Get started</a>
+      <a class="btn secondary" href="releases.html">Latest release</a>
+    </div>
+    <figure class="shot">
+      <img src="dog_community_screenshot.jpg" alt="Screenshot of dog-community querying google.com" />
+      <figcaption class="tiny">Colorful, readable output with multiple record types in one run.</figcaption>
+    </figure>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title">About the project</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Why this fork?</h3>
+        <p>
+          The original project rules; we want it to keep thriving. dog-community continues the work with
+          active maintenance, packaging, platform support, and small UX touches that make daily usage smoother.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Renaming note</h3>
+        <p>
+          You may still see <code>doge</code> in some places as we transition. The command and packages are being
+          renamed to <code>dog</code>/<code>dog-community</code> over time. Expect some overlap while we ship updates.
+        </p>
+      </div>
+      <div class="card">
+        <h3>License & ethos</h3>
+        <p>
+          Open source, MIT. We welcome contributions, packaging help, and CI tweaks (Windows and distro coverage especially).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <h2 class="section-title">Install</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Cargo</h3>
+        <div class="copyrow">
+          <code>cargo install dns-doge</code>
+          <button class="copy" data-copy="cargo install dns-doge">Copy</button>
+        </div>
+        <p class="tiny">Binary name may still be <code>doge</code> during the rename window.</p>
+      </div>
+      <div class="card">
+        <h3>Arch Linux (AUR)</h3>
+        <div class="copyrow">
+          <code>yay -S dns_doge</code>
+          <button class="copy" data-copy="yay -S dns_doge">Copy</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Deb/RPM (coming)</h3>
+        <p class="tiny">Debian/Ubuntu packages and RPMs are planned; watch the <a href="releases.html">Releases</a> page.</p>
+      </div>
+      <div class="card full">
+        <h3>Docker/Podman</h3>
+        <pre class="block">
+docker build -t dog-community .
+docker run -it --rm dog-community doge example.net
+# or alias the image:
+alias doge="docker run -it --rm dog-community"
+        </pre>
+      </div>
+    </div>
+
+    <details class="card" style="margin-top:12px">
+      <summary><strong>Build from source</strong></summary>
+      <pre class="block">
+git clone https://github.com/Dj-Codeman/dog_community
+cd dog_community
+cargo build --release
+./target/release/doge --help
+      </pre>
+    </details>
+  </section>
+
+  <section id="usage">
+    <h2 class="section-title">Usage</h2>
+    <div class="grid">
+      <div class="card full">
+        <h3>Basics</h3>
+        <pre class="block">
+doge example.net                         # default query
+doge example.net MX                      # specific record type
+doge example.net MX @1.1.1.1             # specific nameserver
+doge example.net MX @1.1.1.1 -T          # TCP instead of UDP
+        </pre>
+      </div>
+      <div class="card full">
+        <h3>Arguments style</h3>
+        <pre class="block">
+doge -q example.net -t MX -n 1.1.1.1 -T  # explicit flags
+        </pre>
+      </div>
+      <div class="card full">
+        <h3>JSON & scripting</h3>
+        <pre class="block">
+doge example.com AAAA -J | jq .
+        </pre>
+      </div>
+      <div class="card full">
+        <h3>Protocol modes</h3>
+        <pre class="block">
+-U/--udp     # DNS over UDP
+-T/--tcp     # DNS over TCP
+-S/--tls     # DNS over TLS
+-H/--https   # DNS over HTTPS
+        </pre>
+      </div>
+    </div>
+
+    <details class="card">
+      <summary><strong>More options (highlights)</strong></summary>
+      <pre class="block">
+-q, --query HOST            Domain to query
+-t, --type TYPE             A, AAAA, MX, NS, TXT, ...
+-n, --nameserver ADDR       Resolver to use (e.g. 1.1.1.1)
+-p, --port PORT             Non-default port
+--class CLASS               IN, CH, HS
+-1, --short                 First result only
+-J, --json                  JSON output
+--time                      Print response time
+--edns=SETTING              (disable | hide | show)
+--txid NUMBER               Force transaction ID
+      </pre>
+    </details>
+  </section>
+
+  <section id="features">
+    <h2 class="section-title">Features</h2>
+    <div class="grid">
+      <div class="card"><h3>Readable output</h3><p>Aligned columns, color, and combined queries (A/AAAA/NS/MX/TXT) that are easy on the eyes.</p></div>
+      <div class="card"><h3>DoH/DoT</h3><p>DNS over HTTPS/TLS support for privacy-aware lookups out of the box.</p></div>
+      <div class="card"><h3>JSON mode</h3><p>Emit machine-friendly JSON for pipelines and scripts.</p></div>
+      <div class="card"><h3>Cross-platform</h3><p>Rust 2021, small static releases where possible; Windows nameserver autodetect included.</p></div>
+    </div>
+  </section>
+
+  <section id="contribute">
+    <h2 class="section-title">Contribute</h2>
+    <div class="card">
+      <p>Issues and PRs welcome! Packaging help (Deb/RPM, Scoop/Winget), CI, and docs are great places to start.</p>
+      <ul>
+        <li><a target="_blank" rel="noopener" href="https://github.com/Dj-Codeman/dog_community">Repository</a></li>
+        <li><a target="_blank" rel="noopener" href="https://github.com/Dj-Codeman/dog_community">Open issues</a></li>
+        <li><a target="_blank" rel="noopener" href="releases.html">Latest releases</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© <span id="yyyy"></span> dog-community. MIT licensed. Not affiliated with the original authors.</p>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>
